@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <script src="jquery.min.js" type="text/javascript"></script>
+    <script src="isInViewport.min.js" type="text/javascript"></script>
+    <style>
+        #durationBar{
+            border:solid 1px #164900;
+            width:400;
+            margin-bottom:5px;
+        }
+
+        #positionBar{
+            height:20px;
+            color:white;
+            font-weight:bold;
+            background:#2D9900;
+            text-align:center;
+        }
+
+    </style>
+</head>
+<body>
+    <br />
+    <br />
+    <br />
+    <!--<video id="video2" src = "qixi.mp4" width="400" height="300">-->
+
+    <!--</video>-->
+
+    <div id="durationBar">
+        <div id="positionBar"><span id="displayStatus">0秒</span></div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <button onclick="operation_video(1,'videoPlayer')">播放</button>
+    <button onclick="operation_video(2,'videoPlayer')">暂停</button>
+    <button onclick="operation_video(3,'videoPlayer')">停止</button>
+    &nbsp;&nbsp;
+    <button onclick="operation_video(4,'videoPlayer')">快放</button>
+    <button onclick="operation_video(5,'videoPlayer')">慢放</button>
+    <button onclick="operation_video(6,'videoPlayer')">正常</button>
+
+    <br />
+    <br />
+    <br />
+
+    <div style="height: 500px"></div>
+    <div style="height: 500px"></div>
+    <div style="height: 500px"></div>
+    <video id="abc"
+           controls="controls" autoplay="autoplay"
+           src="qixi.mp4"
+           width="400"
+           height="300"
+           webkit-playsinline="true"
+           playsinline="true"
+           x-webkit-airplay="allow"
+           x5-video-player-type="h5"
+           x5-video-player-fullscreen="false"
+           x5-video-orientation="portraint"
+           style="object-fit:fill">
+    </video>
+    <div style="height: 500px"></div>
+    <div style="height: 500px"></div>
+
+    <video
+            id="videoPlayer_2"
+            src="qixi.mp4"
+            poster="images.jpg"
+            controls="controls" autoplay="autoplay"
+            preload=""
+            width="400"
+            height="300"
+            webkit-playsinline="true"
+            playsinline="true"
+            x-webkit-airplay="allow"
+            x5-video-player-type="h5"
+            x5-video-player-fullscreen="false"
+            x5-video-orientation="portraint"
+            style="object-fit:fill">
+    </video>
+
+    <div style="height: 500px"></div>
+    <div style="height: 500px"></div>
+
+    <video
+            id="videoPlayer_3"
+            src="qixi.mp4"
+            poster="images.jpg"
+            controls="controls" autoplay="autoplay"
+            preload=""
+            width="400"
+            height="300"
+            webkit-playsinline="true"
+            playsinline="true"
+            x-webkit-airplay="allow"
+            x5-video-player-type="h5"
+            x5-video-player-fullscreen="false"
+            x5-video-orientation="portraint"
+            control = "control"
+            style="object-fit:fill">
+    </video>
+    <div style="height: 500px"></div>
+    <div style="height: 500px"></div>
+    <div style="height: 500px"></div>
+    <div style="height: 500px"></div>
+
+</body>
+
+<script>
+
+    $(document).ready(function() {
+        $(window).scroll(function(){
+            play();
+        });
+    });
+
+    /*
+    * 这个方法是预留给OC 调用的
+    * */
+    function play() {
+        $('video').each(function() {
+            if ($(this).is(":in-viewport( 400 )")) {
+                $(this)[0].play();
+
+            } else {
+                $(this)[0].pause();
+            }
+        });
+    }
+
+    /*
+    * 参数
+    * type          - 操作播放器的类型
+    * identity      - 被操作播放器的id
+    *
+    * 1             - 播放
+    * 2             - 暂停
+    * 3             - 停止
+    * 4             - 快放
+    * 5             - 慢放
+    * 6             - 正常
+    * */
+    
+    function operation_video(type,identity) {
+        var video = document.getElementById(identity);
+        switch(type) {
+            case 1:
+                video.play();
+                break;
+            case 2:
+                video.pause();
+                break;
+            case 3:
+                video.pause();
+                video.currentTime = 0;
+                break
+            case 4:
+                video.play();
+                video.playbackRate = 2;
+                break;
+            case 5:
+                video.play();
+                video.playbackRate = 0.5;
+                break;
+            case 6:
+                video.play();
+                video.playbackRate = 1;
+                break;
+            default:
+                break;
+        }
+        video.ontimeupdate = progressUpdate(identity);
+    }
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
